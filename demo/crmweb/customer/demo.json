@@ -1,20 +1,15 @@
 {
 	"code":0,
 	"msg":"后台数据获取错误",
-	"count":13,
+	"count":7,
 	"data":[
-		{"id":1,"username":"聂宗海","sex":"男","city":"重庆"},
-		{"id":2,"username":"汪宝林","sex":"女","city":"重庆"},
-		{"id":3,"username":"刘汪旺","sex":"女","city":"重庆"},
-		{"id":4,"username":"李四","sex":"女","city":"成都"},
-		{"id":5,"username":"李四","sex":"女","city":"北京"},
-		{"id":6,"username":"李四","sex":"女","city":"上海"},
-		{"id":7,"username":"李四","sex":"女","city":"山东"},
-		{"id":8,"username":"李四","sex":"女","city":"南京"},
-		{"id":9,"username":"李四","sex":"女","city":"南京"},
-		{"id":10,"username":"李四","sex":"女","city":"南京"},
-		{"id":11,"username":"李四","sex":"女","city":"南京"},
-		{"id":12,"username":"李四","sex":"女","city":"南京"},
-		{"id":13,"username":"李四","sex":"女","city":"南京"}
+		{"cusNo":1,"cusName":"聂宗海","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"一级"},
+		{"cusNo":2,"cusName":"刘汪旺","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"二级"},
+		{"cusNo":3,"cusName":"熊劲松","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"一级"},
+		{"cusNo":4,"cusName":"聂宗海","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"三级"},
+		{"cusNo":5,"cusName":"聂宗海","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"一级"},
+		{"cusNo":6,"cusName":"聂宗海","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"一级"},
+		{"cusNo":7,"cusName":"聂宗海","cusRegion":"华南","cusAddr":"重庆","cusUrl":"xxxxxx","cusLevel":"普通客户","cusCredit":"五级"}
+		
 	]
 }

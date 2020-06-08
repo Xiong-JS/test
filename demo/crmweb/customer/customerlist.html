@@ -36,14 +36,14 @@
     table.render({
       elem: '#tabCustomer'
       // , height: 550
-      , url: 'http://localhost:8080/customer/customers' //数据接口
-      , method:'POST'           //传输数据方式
+      , url: 'customer/demo.json' //数据接口
+      // , method:'POST'           //传输数据方式
       , page: true //开启分页
       , toolbar: '#barCustomer'
       , defaultToolbar: [] //去掉默认的工具栏按钮
       , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-      , limits: [5, 10, 15, 20]
-      , limit: 5
+      // , limits: [5, 10, 15, 20]
+      // , limit: 5
       , cols: [[ //表头
         { checkbox: true }
         , { field: 'cusNo', title: '客户编号', width: 120, sort: true, unresize: true }
