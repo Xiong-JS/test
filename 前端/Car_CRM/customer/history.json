@@ -1,0 +1,77 @@
+{
+	"code": 0,
+	"msg": "后台数据获取错误",
+	"count": 7,
+	"data": [
+		{
+			"orNo": 1,
+			"id": "00001",
+			"customerid": "1",
+			"productid": "A00001",
+			"customerName": "聂宗海",
+			"time": "2020-01-21",
+			"state": "已完成",
+			"comment": "黑色suv"
+		},
+		{
+			"orNo": 2,
+			"id": "00002",
+			"customerid": "1",
+			"productid": "B00001",
+			"customerName": "刘汪旺",
+			"time": "2020-02-01",
+			"state": "已完成",
+			"comment": "附送一次本店免费洗车机会"
+		},
+		{
+			"orNo": 3,
+			"id": "00003",
+			"customerid": "2",
+			"productid": "B00002",
+			"customerName": "熊劲松",
+			"time": "2020-02-10",
+			"state": "已退货",
+			"comment": "无"
+		},
+		{
+			"orNo": 4,
+			"id": "00004",
+			"customerid": "3",
+			"productid": "A00001",
+			"customerName": "聂宗海",
+			"time": "2020-03-19",
+			"state": "已完成",
+			"comment": "附赠一次免费车窗贴膜"
+		},
+		{
+			"orNo": 5,
+			"id": "00005",
+			"customerid": "3",
+			"productid": "A00002",
+			"customerName": "聂宗海",
+			"time": "2020-04-24",
+			"state": "已完成",
+			"comment": "无"
+		},
+		{
+			"orNo": 6,
+			"id": "00006",
+			"customerid": "4",
+			"productid": "A00006",
+			"customerName": "聂宗海",
+			"time": "2020-04-24",
+			"state": "已退货",
+			"comment": "无"
+		},
+		{
+			"orNo": 7,
+			"id": "00007",
+			"customerid": "1",
+			"productid": "A00003",
+			"customerName": "聂宗海",
+			"time": "2020-05-01",
+			"state": "待支付",
+			"comment": "附赠一个月内5次免费洗车机会"
+		}
+	]
+}

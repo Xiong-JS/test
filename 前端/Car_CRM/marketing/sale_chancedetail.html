@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+</head>
+
+<body style="padding: 10px;">
+    <form class="layui-form" lay-filter='formDetailSaleChance' action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerName" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">性别</label>
+            <div class="layui-input-block">
+                <input type="text" name="sex" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="addr" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户水平</label>
+            <div class="layui-input-block">
+                <input type="text" name="level" readonly class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">成功机率%</label>
+            <div class="layui-input-block">
+                <input type="text" name="successRate" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">概要</label>
+            <div class="layui-input-block">
+                <input type="text" name="summary" readonly class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">机会来源</label>
+            <div class="layui-input-block">
+                <input type="text" name="chanceFrom" readonly class="layui-input">
+            </div>
+        </div>
+
+        <!-- <div class="layui-form-item">
+			<label class="layui-form-label">联系人</label>
+			<div class="layui-input-block">
+				<input type="text" name="chanceFrom" lay-verify="title" autocomplete="off" placeholder="请输入姓名"
+					class="layui-input">
+			</div>
+        </div> -->
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" name="telephone" readonly class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">机会描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="description" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建人</label>
+            <div class="layui-input-block">
+                <input type="text" name="createUsername" readonly class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="createTime" readonly class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">指派人</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" readonly class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">指派时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="assginTime" readonly class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-block">
+                <input type="text" name="state" lay-verify="required" autocomplete="off" placeholder="请输入机会描述"
+                    class="layui-input">
+            </div>
+        </div>
+        <!-- <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="" class="layui-btn layui-btn-primary">返回</button>
+            </div>
+        </div> -->
+    </form>
+
+    <script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        layui.use(['form', 'jquery'], function () {
+            var form = layui.form
+            var $ = layui.jquery
+            form.render()
+            form.val('formDetailSaleChance', {
+                "id": parent.row.id,
+                "customerId": parent.row.customerId,
+                "sex": parent.row.sex,
+                "addr": parent.row.addr,
+                "level": parent.row.level,
+                "state": parent.row.state,
+                "createUserid": parent.row.createUserid,
+                "createUsername": parent.row.createUsername,
+                "createTime": parent.row.createTime,
+                "userid": parent.row.userid,
+                "username": parent.row.username,
+                "assginTime": parent.row.assginTime,
+                "customerName": parent.row.customerName,
+                "successRate": parent.row.successRate,
+                "summary": parent.row.summary,
+                "chanceFrom": parent.row.chanceFrom,
+                "telephone": parent.row.telephone,
+                "description": parent.row.description,
+
+            })
+
+
+        })
+
+    </script>
+</body>
+
+</html>

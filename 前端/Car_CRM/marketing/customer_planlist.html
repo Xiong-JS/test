@@ -1,0 +1,133 @@
+<div>
+    <!-- 表格 -->
+    <table id="tabPlanList" lay-filter="tabPlanList">
+
+    </table>
+    <div class="layui-tab-item">
+    </div>
+
+</div>
+<!-- 表头栏工具 -->
+<script type="text/html" id="barPlanList">
+    <!-- <a class="layui-btn layui-btn-sm "  lay-event="add">创建</a> -->
+<div class="layui-input-inline">
+    <input type="text" id="customerName" lay-verify="title" autocomplete="off" placeholder="客户名称" class="layui-input">
+</div>
+<div class="layui-input-inline">
+    <a class="layui-btn layui-btn-sm " lay-event="search">查询</a>
+</div>
+</script>
+<!-- 表格行 -->
+<script type="text/html" id="toolPlanList">
+    <!-- <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a> -->
+{{# if (d.makeState =="0"){}}
+<a class="layui-btn layui-btn-xs" lay-event="design">制定计划</a>
+<a class="layui-btn layui-btn-xs layui-btn-disabled">计划详情</a>
+{{#}}}
+{{# if (d.makeState !="0"){}}
+<a class="layui-btn layui-btn-xs layui-btn-disabled">制定计划</a>
+<a class="layui-btn layui-btn-xs" lay-event="detail">计划详情</a>
+{{#}}}
+</script>
+<script>
+    var row = null
+    var table = null  //定义全局变量方便修改操作时访问
+    layui.use(['table', 'jquery'], function () {
+        table = layui.table;
+        var $ = layui.jquery;
+
+        //第一个实例
+        table.render({
+            elem: '#tabPlanList'
+            // , height: 550
+            , url: './marketing/data/planlist_shouye.json' //数据接口
+            // , method:'POST'           //传输数据方式
+            , page: true //开启分页
+            , toolbar: '#barPlanList'
+            , defaultToolbar: [] //去掉默认的工具栏按钮
+            , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            // , limits: [5, 10, 15, 20]
+            // , limit: 5
+            , cols: [[ //表头
+                { field: 'customerName', title: '客户名称', width: 120, unresize: true }
+                , { field: 'telephone', title: '联系电话', width: 120, unresize: true }
+                , { field: 'chanceFrom', title: '机会来源', width: 100, unresize: true }
+                , { field: 'summary', title: '概要', unresize: true } //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                , { field: 'description', title: '描述', unresize: true }
+                , { field: 'operate', title: '操作', unresize: true, toolbar: '#toolPlanList', width: 220, fixed: 'right', algin: 'center' }
+            ]]
+            , page: true
+        });
+
+        //监听工具栏事件
+        table.on('toolbar(tabPlanList)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch (obj.event) {
+                case 'search':
+                    //查询
+                    table.reload('tabPlanList', {
+                        where: {
+                            customerName: $('#customerName').val(),
+                        },
+                        page: {
+                            curr: 1 //重载过后再跳转到第一页
+                        }
+                    })
+                    break;
+            }
+        })
+
+        //监听行事件
+        table.on('tool(tabPlanList)', function (obj) {
+            var layEvent = obj.event;
+            var data = obj.data;
+            switch (obj.event) {
+                case 'detail':
+                    $.ajax({
+                        url: './marketing/data/planlist_design.json',
+                        type: 'GET',
+                        dataType: 'JSON',
+                        data: {chanceid:data.id},
+                        success: function (obj) {
+                            //后台成功修改后的操作
+                            row = obj.data[1]
+                            state = data.state
+
+                            layer.open({
+                                type: 2 //此处以iframe举例
+                                , title: '计划详情'
+                                , area: ['700px', '650px']
+                                , shade: 0.5 //背景阴影0~1
+                                , maxmin: true  //最大，最小化按钮
+                                , offset: [ //为了演示，随机坐标
+                                    ($(window).height() - 650) / 2
+                                    , ($(window).width() - 700) / 2
+                                ]
+                                , content: 'marketing/customer_planlistdetail.html'
+                            });
+                        }
+                    })
+
+
+                    break;
+                case 'design':
+                    row = data
+                    layer.open({
+                        type: 2 //此处以iframe举例
+                        , title: '制定计划'
+                        , area: ['390px', '550px']
+                        , shade: 0.5 //背景阴影0~1
+                        , maxmin: true  //最大，最小化按钮
+                        , offset: [ //为了演示，随机坐标
+                            ($(window).height() - 550) / 2
+                            , ($(window).width() - 390) / 2
+                        ]
+                        , content: 'marketing/customer_planlistdesign.html'
+                    });
+                    break;
+
+            };
+        });
+
+    });
+</script>

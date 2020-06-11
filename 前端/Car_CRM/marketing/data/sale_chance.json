@@ -1,0 +1,13 @@
+{
+	"code":0,
+	"msg":"后台数据获取错误",
+	"count":6,
+	"data":[
+		{"id":1,"customerId":1,"sex":"男","addr":"重庆","level":"普通客户","customerName":"诸葛亮","chanceFrom":"线下找人","telephone":"13484611254","successRate":"30","summary":"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","description":"老客户","createUserid":"12","createUsername":"曹操","createTime":"2020-02-23","userid":"1","username":"孙悟空","assginTime":"2020-06-12","state":1},
+        {"id":2,"customerId":2,"sex":"女","addr":"成都","level":"普通客户","customerName":"张飞","chanceFrom":"线下找人","telephone":"13484611254","successRate":"30","summary":"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","description":"老客户","createUserid":"12","createUsername":"曹操","createTime":"2020-02-23","userid":"1","username":"孙悟空","assginTime":"2020-06-12","state":0},
+        {"id":3,"customerId":3,"sex":"男","addr":"重庆","level":"普通客户","customerName":"诸葛亮","chanceFrom":"线下找人","telephone":"13484611254","successRate":"30","summary":"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","description":"老客户","createUserid":"12","createUsername":"曹操","createTime":"2020-02-23","userid":"1","username":"孙悟空","assginTime":"2020-06-12","state":1},
+        {"id":4,"customerId":4,"sex":"女","addr":"北京","level":"普通客户","customerName":"关羽","chanceFrom":"线下找人","telephone":"13484611254","successRate":"30","summary":"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","description":"老客户","createUserid":"12","createUsername":"曹操","createTime":"2020-02-23","userid":"1","username":"孙悟空","assginTime":"2020-06-12","state":0},
+        {"id":5,"customerId":5,"sex":"男","addr":"重庆","level":"VIP客户","customerName":"诸葛亮","chanceFrom":"线下找人","telephone":"13484611254","successRate":"30","summary":"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","description":"老客户","createUserid":"12","createUsername":"曹操","createTime":"2020-02-23","userid":"1","username":"孙悟空","assginTime":"2020-06-12","state":1},
+        {"id":6,"customerId":6,"sex":"女","addr":"重庆","level":"普通客户","customerName":"诸葛亮","chanceFrom":"线下找人","telephone":"13484611254","successRate":"30","summary":"哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈","description":"老客户","createUserid":"12","createUsername":"曹操","createTime":"2020-02-23","userid":"1","username":"孙悟空","assginTime":"2020-06-12","state":3}
+	]
+}

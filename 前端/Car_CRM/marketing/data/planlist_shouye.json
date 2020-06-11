@@ -1,0 +1,27 @@
+{
+    "code": 0,
+    "msg": "后台数据获取",
+    "count": 6,
+    "data": [
+        {
+            "id": 1,
+            "customerName": "诸葛亮",
+            "chanceFrom": "线下找人",
+            "telephone": "13484611254",
+            "summary": "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈",
+            "description": "老客户",
+            "state":2,
+            "makeState": 1
+        },
+        {
+            "id": 2,
+            "customerName": "诸葛亮",
+            "chanceFrom": "线下找人",
+            "telephone": "13484611254",
+            "summary": "哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈",
+            "description": "老客户",
+            "state":3,
+            "makeState": 1
+        }
+    ]
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+</head>
+
+<body style="padding: 10px;">
+    <form class="layui-form" lay-filter='formUpdateSaleChance' action="">
+        <input type="hidden" name="customerId" />
+        <input type="hidden" name="sex" />
+        <input type="hidden" name="addr" />
+        <input type="hidden" name="level" />
+        <input type="hidden" name="state" />
+        <input type="hidden" name="createUserid" />
+        <input type="hidden" name="createUsername" />
+        <input type="hidden" name="createTime" />
+        <input type="hidden" name="userid" />
+        <input type="hidden" name="username" />
+        <input type="hidden" name="assginTime" />
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">客户名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="customerName" lay-verify="title" autocomplete="off" placeholder="请输入姓名"
+                    class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">成功机率%</label>
+            <div class="layui-input-block">
+                <input type="text" name="successRate" lay-verify="title" autocomplete="off" placeholder="请输入姓名"
+                    class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">概要</label>
+            <div class="layui-input-block">
+                <input type="text" name="summary" lay-verify="title" autocomplete="off" placeholder="请输入姓名"
+                    class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">机会来源</label>
+            <div class="layui-input-block">
+                <input type="text" name="chanceFrom" lay-verify="title" autocomplete="off" placeholder="请输入姓名"
+                    class="layui-input">
+            </div>
+        </div>
+
+        <!-- <div class="layui-form-item">
+			<label class="layui-form-label">联系人</label>
+			<div class="layui-input-block">
+				<input type="text" name="chanceFrom" lay-verify="title" autocomplete="off" placeholder="请输入姓名"
+					class="layui-input">
+			</div>
+        </div> -->
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">联系电话</label>
+            <div class="layui-input-block">
+                <input type="text" name="telephone" lay-verify="phone" autocomplete="off" placeholder="请输入联系电话"
+                    class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">机会描述</label>
+            <div class="layui-input-block">
+                <input type="text" name="description" lay-verify="required" autocomplete="off" placeholder="请输入机会描述"
+                    class="layui-input">
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button type="submit" class="layui-btn" lay-submit=""
+                    lay-filter="btnSubmitUpdateSaleChance">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+    <script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        layui.use(['form', 'jquery'], function () {
+            var form = layui.form
+            var $ = layui.jquery
+            form.render()
+            form.val('formUpdateSaleChance', {
+                "id":parent.row.id,
+                "customerId": parent.row.customerId,
+                "sex": parent.row.sex,
+                "addr": parent.row.addr,
+                "level": parent.row.level,
+                "state": parent.row.state,
+                "createUserid": parent.row.createUserid,
+                "createUsername": parent.row.createUsername,
+                "createTime":parent.row.createTime,
+                "userid":parent.row.userid,
+                "username":parent.row.username,
+                "assginTime":parent.row.assginTime,
+                "customerName":parent.row.customerName,
+                "successRate":parent.row.successRate,
+                "summary":parent.row.summary,
+                "chanceFrom":parent.row.chanceFrom,
+                "telephone":parent.row.telephone,
+                "description":parent.row.description,
+
+            })
+
+            //表单提交事件
+            form.on('submit(btnSubmitUpdateSaleChance)', function (data) {
+                $.ajax({
+                    url: 'http://localhost:8080/customer/updateCustomer',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: data.field,
+                    success: function (obj) {
+                        //后台成功修改后的操作
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭   
+                        parent.table.reload('tabSaleChance');
+                    }
+                })
+                return false;
+            })
+
+        })
+
+    </script>
+</body>
+
+</html>

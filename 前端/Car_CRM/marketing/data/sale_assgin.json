@@ -1,0 +1,57 @@
+{
+    "code": 0,
+    "msg": "成功!",
+    "count": 0,
+    "data": [
+        {
+            "id": 1,
+            "account": "123456",
+            "password": "123456",
+            "nickname": "刘备",
+            "phone": "12345678910",
+            "sex": "男",
+            "position": "客户经理",
+            "limited": 1
+        },
+        {
+            "id": 5,
+            "account": "123789",
+            "password": "123789",
+            "nickname": "周瑜",
+            "phone": "12345678914",
+            "sex": "男",
+            "position": "客户经理",
+            "limited": 1
+        },
+        {
+            "id": 9,
+            "account": "333333",
+            "password": "333333",
+            "nickname": "孙尚香",
+            "phone": "12345678918",
+            "sex": "女",
+            "position": "客户经理",
+            "limited": 1
+        },
+        {
+            "id": 13,
+            "account": "777777",
+            "password": "777777",
+            "nickname": "貂蝉",
+            "phone": "12354678922",
+            "sex": "女",
+            "position": "客户经理",
+            "limited": 1
+        },
+        {
+            "id": 17,
+            "account": "357159",
+            "password": "357159",
+            "nickname": "夏侯惇",
+            "phone": "12345678926",
+            "sex": "男",
+            "position": "客户经理",
+            "limited": 1
+        }
+    ]
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css" />
+</head>
+
+<body style="padding: 10px;">
+    <form class="layui-form" lay-filter='formPlanListDetail' action="">
+        <!-- 机会id -->
+        <input type="hidden" name="id" />
+        <input type="hidden" name="userid" />
+        <div class="layui-form-item">
+            <label class="layui-form-label">计划前期</label>
+            <div class="layui-input-block">
+                <textarea name="content1" lay-verify="required" readonly class="layui-textarea"></textarea>
+                <div id="planPro">
+                    <input type="checkbox" id="planProCheck" title="计划前期">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">计划中期</label>
+            <div class="layui-input-block">
+                <textarea name="content2" lay-verify="required" readonly class="layui-textarea"></textarea>
+                <div id="planMet">
+                    <input type="checkbox" id="planMetCheck" title="计划中期">
+                </div>
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">计划后期</label>
+            <div class="layui-input-block">
+                <textarea name="content3" lay-verify="required" readonly class="layui-textarea"></textarea>
+                <div id="planAna">
+                    <input type="checkbox" id="planAnaCheck" title="计划后期">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item" style="margin-top: 50px;">
+            <div class="layui-progress" lay-filter="planProgress" lay-showPercent="yes">
+                <div class="layui-progress-bar layui-bg-red" lay-percent="30%"></div>
+            </div>
+        </div>
+        <input type="hidden" name="progress" />
+
+        <div id="executing" class="layui-form-item" style="margin-top: 50px;">
+            <div class="layui-input-block" >
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="btnSubmitSave">保存</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="btnSubmitSuccess">开发成功</button>
+                <button type="submit" class="layui-btn" lay-submit="" lay-filter="btnSubmitFailed">开发失败</button>
+            </div>
+        </div>
+        <div id="executfailed" class="layui-form-item" style="margin-top: 50px;margin-left: 200px;">
+            <div class="layui-input-block">
+                <a class="layui-btn  layui-btn-disabled">开发失败</a>
+            </div>
+        </div>
+        <div id="executsuccess" class="layui-form-item" style="margin-top: 50px;margin-left: 200px;">
+            <div class="layui-input-block">
+                <a class="layui-btn  layui-btn-normal">开发成功</a>
+            </div>
+        </div>
+    </form>
+
+
+    <script src="../layui/layui.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript">
+        layui.use(['form', 'jquery', 'element'], function () {
+            var form = layui.form
+            var $ = layui.jquery
+            var element = layui.element
+
+            form.render()
+            form.val('formPlanListDetail', {
+                "id": parent.row.id,
+                "content1": parent.row.content1,
+                "content2": parent.row.content2,
+                "content3": parent.row.content3
+            })
+            var planPro = document.getElementById('planPro');
+            var planMet = document.getElementById('planMet');
+            var planAna = document.getElementById('planAna');
+            var executing = document.getElementById('executing')
+            var executsuccess = document.getElementById('executsuccess')
+            var executfailed = document.getElementById('executfailed')
+            if (parent.row.progress == 0) {
+                planMet.hidden = true
+                planAna.hidden = true
+                $('.layui-progress-bar').attr('lay-percent', '0/3');
+                element.init()
+                element.progress('planProgress', '0/3')
+            } else if (parent.row.progress == 1) {
+                // console.log("222")
+                $("#planProCheck").attr("checked", 'checked');
+                form.render()
+                $("#planProCheck").attr("disabled", 'disabled');
+                planAna.hidden = true
+                $('.layui-progress-bar').attr('lay-percent', '1/3');
+                element.init()
+                element.progress('planProgress', '1/3')
+
+
+            } else if (parent.row.progress == 2) {
+                // console.log("333")
+                $("#planProCheck").attr("checked", 'checked');
+                $("#planMetCheck").attr("checked", 'checked');
+                form.render()
+                $("#planProCheck").attr("disabled", "disabled")
+                $("#planMetCheck").attr("disabled", "disabled")
+                $('.layui-progress-bar').attr('lay-percent', '2/3');
+                element.init()
+                element.progress('planProgress', '2/3')
+            } else {
+                $("#planProCheck").attr("checked", 'checked');
+                $("#planMetCheck").attr("checked", 'checked');
+                $("#planAnaCheck").attr("checked", 'checked');
+                form.render()
+                $("#planProCheck").attr("disabled", "disabled")
+                $("#planMetCheck").attr("disabled", "disabled")
+                $("#planAnaCheck").attr("disabled", "disabled")
+                $('.layui-progress-bar').attr('lay-percent', '3/3');
+                element.init()
+                element.progress('planProgress', '3/3')
+            }
+            // 1表示已指定
+            if (parent.state == 1) {
+                executing.hidden = false
+                executsuccess.hidden = true
+                executfailed.hidden = true
+            }else if(parent.state == 2){//2开发成功
+                executing.hidden = true
+                executsuccess.hidden = false
+                executfailed.hidden = true
+            }else{//3开发失败
+                executing.hidden = true
+                executsuccess.hidden = true
+                executfailed.hidden = false
+            }
+
+            //表单保存提交事件
+            form.on('submit(btnSubmitSave)', function (data) {
+                document.getElementsByName('progress').value = parent.row.progress
+                console.log(document.getElementsByName('progress').value)
+                $.ajax({
+                    url: 'http://localhost:8080/customer/updateCustomer',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: data.field,
+                    success: function (obj) {
+                        //后台成功修改后的操作
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭   
+                        parent.table.reload('tabPlanList');
+                    }
+                })
+                return false;
+            })
+            //表单开发成功提交事件
+            form.on('submit(btnSubmitSuccess)', function (data) {
+                document.getElementsByName('progress').value = parent.row.progress
+                console.log(document.getElementsByName('progress').value)
+                $.ajax({
+                    url: 'http://localhost:8080/customer/updateCustomer',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: data.field,
+                    success: function (obj) {
+                        //后台成功修改后的操作
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭   
+                        parent.table.reload('tabPlanList');
+                    }
+                })
+                return false;
+            })
+            //表单开发失败提交事件
+            form.on('submit(btnSubmitFailed)', function (data) {
+                document.getElementsByName('progress').value = parent.row.progress
+                console.log(document.getElementsByName('progress').value)
+                $.ajax({
+                    url: 'http://localhost:8080/customer/updateCustomer',
+                    type: 'POST',
+                    dataType: 'JSON',
+                    data: data.field,
+                    success: function (obj) {
+                        //后台成功修改后的操作
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭   
+                        parent.table.reload('tabPlanList');
+                    }
+                })
+                return false;
+            })
+
+            $("#planPro").click(function () {
+                if (document.getElementById('planProCheck').checked) {
+                    parent.row.progress = 1
+                    planMet.hidden = false
+                } else {
+                    parent.row.progress = 0
+                    planMet.hidden = true
+                }
+
+            });
+            $("#planMet").click(function () {
+                if (document.getElementById('planMetCheck').checked) {
+                    parent.row.progress = 2
+                    planAna.hidden = false
+                } else {
+                    planAna.hidden = true
+                    parent.row.progress = 1
+                }
+            });
+            $("#planAna").click(function () {
+                if (document.getElementById('planAnaCheck').checked) {
+                    parent.row.progress = 3
+                    console.log(parent.row.progress)
+                } else {
+                    parent.row.progress = 2
+                    console.log(parent.row.progress)
+                }
+            })
+
+
+        })
+
+
+    </script>
+</body>
+
+</html>

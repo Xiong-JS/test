@@ -1,27 +1,36 @@
 <div>
-  <table id="tabCustomer" lay-filter="tabCustomer">
+  <table id="tabWarn" lay-filter="tabWarn">
 
   </table>
   <div class="layui-tab-item">
+    <div id="pageDemo"></div>
   </div>
 
 </div>
 <script type="text/html" id="barCustomer">
-  <a class="layui-btn layui-btn-sm "  lay-event="add">新增</a>
+  <!-- <a class="layui-btn layui-btn-sm "  lay-event="add">新增</a> -->
   <a class="layui-btn layui-btn-sm layui-btn-danger"  lay-event="deletecheck">批量删除</a>
-<div class="layui-input-inline" style="margin-left:200px">
+<div class="layui-input-inline" style="margin-left:350px">
       <div class="layui-input-inline">
-      <input type="text" id="cusName" lay-verify="title" autocomplete="off" placeholder="客户名称" class="layui-input">
+      <input type="text" id="cuname" lay-verify="title" autocomplete="off" placeholder="客户名称" class="layui-input">
     </div>
     <div class="layui-input-inline">
-    <input type="text" id="cusNo" lay-verify="title" autocomplete="off" placeholder="客户编号" class="layui-input">
+    <input type="text" id="userid" lay-verify="title" autocomplete="off" placeholder="负责人编号" class="layui-input">
     </div>
     <a class="layui-btn layui-btn-sm "  lay-event="search">查询</a>
   </div>
 </script>
 <script type="text/html" id="toolCustomer">
+  <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="examine">查看</a>
   <a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/html" id="warnMeasureTool">
+    <a class="layui-btn layui-btn-xs" lay-event="defer">暂缓流失</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="define">确定流失</a>
+</script>
+<script type="text/html" id="detailTool">
+    <div lay-event="examine">详情</div>
 </script>
 <script>
   var row = null
@@ -33,7 +42,7 @@
 
     //第一个实例
     table.render({
-      elem: '#tabCustomer'
+      elem: '#tabWarn'
       // , height: 550
       , url: 'customer/demo.json' //数据接口
       // , method:'POST'           //传输数据方式
@@ -45,48 +54,29 @@
       // , limit: 5
       , cols: [[ //表头
         { checkbox: true }
-        , { field: 'cusNo', title: '客户编号', width: 120, sort: true, unresize: true }
-        , { field: 'cusName', title: '客户名称', unresize: true }
-        , { field: 'cusRegion', title: '客户区域', width: 100, unresize: true }
-        , { field: 'cusAddr', title: '客户地址', width: 250, unresize: true }
-        , { field: 'cusUrl', title: '客户网站', width: 250, unresize: true } //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-        , { field: 'cusLevel', title: '客户等级', width: 150, unresize: true }
-        , {
-          field: 'cusCredit', title: '信用等级', unresize: true, templet: function (item) {
-            switch (item.cusCredit) {
-              case '一级': return '一等';
-              case '二级': return '二等';
-              case '三级': return '三等';
-              case '四级': return '四等';
-              case '五级': return '五等';
-              default: return '无';
-            }
-          }, width: 100
-        }
-        , { field: 'operate', title: '操作', unresize: true, toolbar: '#toolCustomer', width: 120, fixed: 'right' }
+        , { field: 'id', align: 'center', title: '预警编号', width: 115, sort: true, unresize: true }
+        , { field: 'cuname', align: 'center', title: '客户名称', width: 115, unresize: true }
+        , { field: 'userid', align: 'center', title: '负责人编号', width: 115, unresize: true }
+        , { field: 'time', align: 'center', title: '预警时间', width: 180, unresize: true }
+        , { field: 'state', title: '预警状态', width: 122, unresize: true ,templet:function(item){
+             switch(item.state){
+                 case '已流失':return '已流失';
+                 case '正常':return '正常';
+                 default: return'无';
+             }
+        }}
+        , { field: 'measureBut', align: 'center', title: '预警措施', width: 210, unresize: true,toolbar:'#warnMeasureTool'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+        , { field: 'lost_reason', align: 'center', title: '流失原因', style:"color:#009688",width: 160, toolbar :'#detailTool', unresize: true }
+        , { field: 'operate', align: 'center', title: '操作', unresize: true, toolbar: '#toolCustomer', width: 230, fixed: 'right' }
       ]]
       , page: true
     });
 
 
-    //监听工具栏事件
-    table.on('toolbar(tabCustomer)', function (obj) {
+    //监听工具栏事件 
+    table.on('toolbar(tabWarn)', function (obj) {
       var checkStatus = table.checkStatus(obj.config.id);
       switch (obj.event) {
-        case 'add':
-          layer.open({
-            type: 2 //此处以iframe举例
-            , title: '新增客户信息'
-            , area: ['450px', '500px']  //宽高
-            , shade: 0.5//阴影（0-1之间的数）
-            , maxmin: true//最大、最小化按钮
-            , offset: [ //设置窗口位置
-              ($(window).height() - 500) / 2
-              , ($(window).width() - 450) / 2
-            ]
-            , content: 'customer/customeradd.html'
-          })
-          break;
         case 'deletecheck':
           //批量删除
           if (checkStatus.data.length <= 0) {
@@ -108,7 +98,7 @@
               },
               success: function (obj) {
                 layer.msg(obj.msg);
-                table.reload('tabCustomer')
+                table.reload('tabWarn')
               }
             })
 
@@ -117,10 +107,10 @@
           break;
         case 'search':
           //查询
-          table.reload('tabCustomer', {
+          table.reload('tabWarn', {
             where: {
-              cusName: $('#cusName').val(),
-              cusNo: $('#cusNo').val()
+              cuname: $('#cuname').val(),
+              userid: $('#userid').val()
             },
             page: {
               curr: 1 //重载过后再跳转到第一页
@@ -131,7 +121,7 @@
     })
 
     //监听行事件
-    table.on('tool(tabCustomer)', function (obj) {
+    table.on('tool(tabWarn)', function (obj) {
       var layEvent = obj.event;
       var data = obj.data;
       switch (obj.event) {
@@ -147,7 +137,7 @@
               data: { id: id },
               success: function (obj) {
                 layer.msg(obj.msg);
-                table.reload('tabCustomer')
+                table.reload('tabWarn')
               }
             })
 
@@ -169,6 +159,20 @@
             ]
             , content: 'customer/customerupdate.html'
           });
+          break;
+          case 'examine':
+          layer.open({
+            type: 2 //此处以iframe举例
+            , title: '预警详情'
+            , area: ['450px', '500px']  //宽高
+            , shade: 0.5//阴影（0-1之间的数）
+            , maxmin: true//最大、最小化按钮
+            , offset: [ //设置窗口位置
+              ($(window).height() - 500) / 2
+              , ($(window).width() - 450) / 2
+            ]
+            , content: 'customer/customeradd.html'
+          })
           break;
       };
     });
